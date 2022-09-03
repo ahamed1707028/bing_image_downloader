@@ -8,7 +8,7 @@ except ImportError:  # Python 3
     from .bing import Bing
 
 
-def download(query, limit=100, output_dir='dataset', adult_filter_off=True, 
+def download(query, limit=100, max_page=100, output_dir='dataset', adult_filter_off=True, 
 force_replace=False, timeout=60, filter="", verbose=True):
 
     # engine = 'bing'
@@ -34,7 +34,7 @@ force_replace=False, timeout=60, filter="", verbose=True):
         sys.exit(1)
         
     print("[%] Downloading Images to {}".format(str(image_dir.absolute())))
-    bing = Bing(query, limit, image_dir, adult, timeout, filter, verbose)
+    bing = Bing(query, limit, max_page, image_dir, adult, timeout, filter, verbose)
     bing.run()
 
 
