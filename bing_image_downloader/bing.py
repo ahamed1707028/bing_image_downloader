@@ -12,7 +12,7 @@ Author: Guru Prasad (g.gaurav541@gmail.com)
 
 
 class Bing:
-    def __init__(self, query, limit, output_dir, adult, timeout,  filter='', verbose=True):
+    def __init__(self, query, limit, max_page, output_dir, adult, timeout,  filter='', verbose=True):
         self.download_count = 0
         self.query = query
         self.output_dir = output_dir
@@ -20,6 +20,7 @@ class Bing:
         self.filter = filter
         self.verbose = verbose
         self.seen = set()
+        self.max_page = max_page
 
         assert type(limit) == int, "limit must be integer"
         self.limit = limit
@@ -85,7 +86,7 @@ class Bing:
 
     
     def run(self):
-        while self.download_count < self.limit:
+        while (self.download_count < self.limit) and (self.page_counter < self.max_page):
             if self.verbose:
                 print('\n\n[!!]Indexing page: {}\n'.format(self.page_counter + 1))
             # Parse the page source and download pics
