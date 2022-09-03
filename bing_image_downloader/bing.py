@@ -56,9 +56,6 @@ class Bing:
     def save_image(self, link, file_path):
         request = urllib.request.Request(link, None, self.headers)
         image = urllib.request.urlopen(request, timeout=self.timeout).read()
-        if not imghdr.what(None, image):
-            print('[Error]Invalid image, not saving {}\n'.format(link))
-            raise ValueError('Invalid image, not saving {}\n'.format(link))
         with open(str(file_path), 'wb') as f:
             f.write(image)
 
